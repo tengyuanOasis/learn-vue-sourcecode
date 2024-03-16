@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue源码学习</title>
+    <script src="../dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+  </body>
+
+  <script>
+    window.app = new Vue({
+      template: `
+    <div>
+      <div style="border:1px solid #eee;padding:10px">
+        <p>在compiler过程中, 静态资源将会生成单独的staticRenderFns,性能优化</p>
+        <ul>
+          <li><p>静态文本</p></li>
+          <li v-once>这是一个v-once标记的标签</li>
+        </ul>
+      </div>
+
+      <img style="width:200px;border-radius:10px" src="https://raw.githubusercontent.com/tengyuanOasis/image/master/image/202403151925403.png" />
+      <p>
+        {{name}}
+      </p>
+      <ul>
+        <li v-for="(item,index) in hobby" :key="index">{{item}}</li>
+      </ul>
+      <button v-on:click="changeHobby">修改hobby</button>
+    </div>
+    `,
+      el: "#app",
+      props: {
+        age: Number,
+      },
+      data() {
+        return {
+          name: "Mike",
+          hobby: ["swimming", "travel"],
+        };
+      },
+      methods: {
+        changeHobby() {
+          this.hobby.push("coding");
+        },
+      },
+    });
+  </script>
+</html>
